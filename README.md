@@ -28,6 +28,12 @@ kubectl replace --force -n mlteam -f deployment_pvc.yaml
 <strong> NOTE: Ensure xsapp does not already exist, deleted previous or rename if required </strong>  
 > kubectl replace --force -n mlteam -f deployment_xsuaa.yaml
 
+> Manually generate the XSUAA credentials in Kyma  UI 
+>> Service Managent -> Instances -> xsuaa-jupyterhub-mlteam 
+>> Crednetials tab -> Create Credentials button
+>> Click on generated credentials and hit 'decode' button  
+
+
 
 
 
