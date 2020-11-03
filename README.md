@@ -42,9 +42,11 @@ Manually generate the XSUAA credentials in Kyma  UI
 ## STEP 2 -Deploy JupypterHub and Service access point
 
 Manually update <strong> deployment_jupyterhub.yaml </strong> with
-> clientid / secret from Step 2  
-> urls to domain specific XSUAA service  
-> cluster info  
+* clientid / secret from Step 2  
+* urls to domain specific XSUAA service  
+* cluster info  
+
+NOTE:  Deployment may take ~10 minutes as includes a jupyter build step. If you have docker repository you can prepare an docker file / images containing the more time consuming steps. You would then refer to this image in the deployment yaml.  
 
 
 
