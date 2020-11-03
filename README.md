@@ -30,8 +30,8 @@ Deploy xsuaa service which creates role in SCP CF
 > kubectl replace --force -n mlteam -f deployment_xsuaa.yaml
 
 Manually generate the XSUAA credentials in Kyma  UI 
-> Service Managent -> Instances -> xsuaa-jupyterhub-mlteam 
-> Crednetials tab -> Create Credentials button
+> Service Managent -> Instances -> xsuaa-jupyterhub-mlteam  
+> Crednetials tab -> Create Credentials button  
 > Click on generated credentials and hit 'decode' button  
 
 
