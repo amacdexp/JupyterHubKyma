@@ -8,11 +8,11 @@ Also included is the hana-ml python library to simplify connection to SAP Hana w
 * Provision a Kyma environment on SAP Cloud Platform
 * Create a namespace e.g. "mlteam"
 * Download your Kyma/K8S access kubeconfig.yml and set KUBECONFIG environment variable to point to kubeconfig.yml
-> ## windows cmd
+> ### Windows cmd
 >> Set KUBECONFIG=C:\Users\<user>\Downloads\kubeconfig.yml 
-> ## windows powershell
+> ### Windows Powershell
 >> $env:KUBECONFIG="C:\Users\<user>\Downloads\kubeconfig.yml" 
-> ## linux
+> ### Linux
 >> export KUBECONFIG=/<path>/kubeconfig.yml 
 
 * Check the cluster in your new namespace
@@ -48,5 +48,6 @@ Manually update <strong> deployment_jupyterhub.yaml </strong> with
 
 NOTE:  Deployment may take ~10 minutes as includes a jupyter build step. If you have docker repository you can prepare an docker file / images containing the more time consuming steps. You would then refer to this image in the deployment yaml.  
 
+NOTE2: Occassionally the Jupyter build may fail due to low memory.  Re-running usually resolves, if problem persists increase memory of pod and/or create an image with the JupyterHub pre-built  
 
 
