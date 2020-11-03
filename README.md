@@ -25,4 +25,4 @@ kubectl replace --force -n mlteam -f deployment_pvc.yaml
 
 ## STEP 2 - Create XSUAA service  
 <strong> NOTE: Ensure xsapp does not already exist, deleted previous or rename if required </strong>  
-kubectl replace --force -n mlteam -f deployment_xsuaa.yaml
+> kubectl replace --force -n mlteam -f deployment_xsuaa.yaml
