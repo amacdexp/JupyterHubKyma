@@ -1,0 +1,22 @@
+---
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
+metadata:
+  name: xsuaa-jupyterhub-mlteam
+spec:
+  clusterServiceClassExternalName: xsuaa
+  clusterServicePlanExternalName: application
+  parameters:
+    xsappname: xsuaa-jupyterhub-mlteam
+    tenant-mode: dedicated
+    scopes:
+      - name: $XSAPPNAME.user
+        description: JupyterHub User
+    role-templates:
+      - name: jupyterhub
+        description: JupyterHub Access
+        scope-references:
+          - $XSAPPNAME.user
+    oauth2-configuration:
+      redirect-uris:
+        - https://*/**
