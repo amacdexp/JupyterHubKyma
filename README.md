@@ -48,6 +48,6 @@ Manually update <strong> deployment_jupyterhub.yaml </strong> with
 
 NOTE:  Deployment may take ~10 minutes as includes a jupyter build step. If you have docker repository you can prepare an docker file / images containing the more time consuming steps. You would then refer to this image in the deployment yaml.  
 
-NOTE2: Occassionally the Jupyter build may fail due to low memory.  Re-running usually resolves, if problem persists increase memory of pod and/or create an image with the JupyterHub pre-built  
+NOTE2: Occassionally you may see in the Pod logs that the the Jupyter build failed due to low memory.  Re-running usually resolves, but if problem persists increase memory of pod and/or create an image with the JupyterHub pre-built  
 
 
