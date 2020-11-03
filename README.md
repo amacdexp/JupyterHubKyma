@@ -54,17 +54,17 @@ NOTE:  Deployment may take ~10 minutes as includes a jupyter build step. If you 
 NOTE2: Occassionally you may see in the Pod logs that the the Jupyter build failed due to low memory.  Re-running usually resolves, but if problem persists increase memory of pod and/or create an image with the JupyterHub pre-built  
 
 ## STEP 4 (optional) Add a shared folder in Jupyter terminal window
-ln -s  /home/mlteam $HOME/mlteam
+> ln -s  /home/mlteam $HOME/mlteam
 
 
 ## Commonly used Kubcetl commands while deploying and checking
-kubectl -n mlteam get services
-kubectl get APIRule -n mlteam jupyterhub -o yaml
-kubectl get secret -n mlteam <manually generated secret> -o yaml
-kubectl get ServiceInstance -n mlteam
+> kubectl -n mlteam get services
+> kubectl get APIRule -n mlteam jupyterhub -o yaml
+> kubectl get secret -n mlteam <manually generated secret> -o yaml
+> kubectl get ServiceInstance -n mlteam
   
-kubectl get pods -n mlteam
-kubectl exec --stdin -n mlteam --tty jupyterhub-<POD ID> -- /bin/bash
+> kubectl get pods -n mlteam
+> kubectl exec --stdin -n mlteam --tty jupyterhub-<POD ID> -- /bin/bash
 
 
 
