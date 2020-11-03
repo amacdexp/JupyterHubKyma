@@ -6,15 +6,13 @@ Run a shared jupyter hub environment that enables XSUAA autenticated users to ac
 # Pre Reqs:
 * Provision a Kyma environment on SAP Cloud Platform
 * Create a namespace e.g. "mlteam"
-* Download your Kyma/K8S access kubeconfig.yaml 
-
-
-## windows cmd
-Set KUBECONFIG=C:\Users\<user>\Downloads\kubeconfig.yml 
-## windows powershell
-$env:KUBECONFIG="C:\Users\<user>\Downloads\kubeconfig.yml" 
-## linux
-export KUBECONFIG=/<path>/kubeconfig.yml 
+* Download your Kyma/K8S access kubeconfig.yaml and set KUBECONFIG environment variable
+> ## windows cmd
+>> Set KUBECONFIG=C:\Users\<user>\Downloads\kubeconfig.yml 
+> ## windows powershell
+>> $env:KUBECONFIG="C:\Users\<user>\Downloads\kubeconfig.yml" 
+> ## linux
+>> export KUBECONFIG=/<path>/kubeconfig.yml 
 
 ## Check the cluster in your new namespace
 kubectl cluster-info  -n mlteam
