@@ -3,7 +3,7 @@ JupyterHub running on SAP Cloud Platform Kyma Runtime (Kubernetes) with XSUAA OA
 
 Run a shared jupyter hub environment that enables XSUAA autenticated users to access.
 
-# Pre Reqs:
+## Pre Reqs:
 * Provision a Kyma environment on SAP Cloud Platform
 * Create a namespace e.g. "mlteam"
 * Download your Kyma/K8S access kubeconfig.yaml and set KUBECONFIG environment variable
@@ -18,9 +18,9 @@ Run a shared jupyter hub environment that enables XSUAA autenticated users to ac
 > kubectl cluster-info  -n mlteam
 
 
-# STEP 1 - Create Persitant volume claim to be used for storage of Jupyter Notebooks and associated files
+## STEP 1 - Create Persitant volume claim to be used for storage of Jupyter Notebooks and associated files
 kubectl replace --force -n mlteam -f deployment_pvc.yaml
 
 
-# STEP 2 - Create XSUAA service  [Ensure xsapp does not already exist]
+## STEP 2 - Create XSUAA service  [Ensure xsapp does not already exist]
 kubectl replace --force -n mlteam -f deployment_xsuaa.yaml
