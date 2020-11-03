@@ -14,9 +14,8 @@ Run a shared jupyter hub environment that enables XSUAA autenticated users to ac
 > ## linux
 >> export KUBECONFIG=/<path>/kubeconfig.yml 
 
-## Check the cluster in your new namespace
-kubectl cluster-info  -n mlteam
-
+* Check the cluster in your new namespace
+> kubectl cluster-info  -n mlteam
 
 
 # STEP 1 - Create Persitant volume claim to be used for storage of Jupyter Notebooks and associated files
