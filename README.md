@@ -58,13 +58,13 @@ NOTE2: Occassionally you may see in the Pod logs that the the Jupyter build fail
 
 
 ## Commonly used Kubcetl commands while deploying and checking
-> kubectl -n mlteam get services
-> kubectl get APIRule -n mlteam jupyterhub -o yaml
-> kubectl get secret -n mlteam <manually generated secret> -o yaml
-> kubectl get ServiceInstance -n mlteam
+> kubectl -n mlteam get services  
+> kubectl get APIRule -n mlteam jupyterhub -o yaml  
+> kubectl get secret -n mlteam <manually generated secret> -o yaml  
+> kubectl get ServiceInstance -n mlteam  
   
-> kubectl get pods -n mlteam
-> kubectl exec --stdin -n mlteam --tty jupyterhub-<POD ID> -- /bin/bash
+> kubectl get pods -n mlteam  
+> kubectl exec --stdin -n mlteam --tty jupyterhub-<POD ID> -- /bin/bash  
 
 
 
