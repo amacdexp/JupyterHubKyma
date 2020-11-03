@@ -2,6 +2,7 @@
 JupyterHub running on SAP Cloud Platform Kyma Runtime (Kubernetes) with XSUAA OAUTH2 authentication
 
 Exanmple of runing a shared JupyteHub environment that enables XSUAA autenticated users to access.
+Also included is the hana-ml python library to simplify connection to SAP Hana with pandas dataframes, as well as providing the ability to push down ML logic to HANA reducing data being copied. 
 
 ## Pre Reqs:
 * Provision a Kyma environment on SAP Cloud Platform
@@ -26,3 +27,7 @@ kubectl replace --force -n mlteam -f deployment_pvc.yaml
 ## STEP 2 - Create XSUAA service  
 <strong> NOTE: Ensure xsapp does not already exist, deleted previous or rename if required </strong>  
 > kubectl replace --force -n mlteam -f deployment_xsuaa.yaml
+
+
+
+
