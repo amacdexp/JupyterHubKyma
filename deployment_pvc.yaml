@@ -1,0 +1,15 @@
+---
+## PVC is seperate from main deployment so contents isn't deleted if main deployment is replaced.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jupyterhub-pvc
+  labels:
+    app: jupyterhub
+spec:
+  accessModes:
+    - ReadWriteOnce
+    #- ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
