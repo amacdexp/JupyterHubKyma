@@ -39,6 +39,12 @@ Manually generate the XSUAA credentials in Kyma  UI
 > Click 'Decode' button  
 
 
+## STEP 2 -Deploy JupypterHub and Service access point
+
+Manually update <strong> deployment_jupyterhub.yaml </strong> with
+> clientid / secret from Step 2  
+> urls to domain specific XSUAA service  
+> cluster info  
 
 
 
