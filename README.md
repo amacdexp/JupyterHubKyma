@@ -26,13 +26,17 @@ kubectl replace --force -n mlteam -f deployment_pvc.yaml
 
 ## STEP 2 - Create XSUAA service  
 <strong> NOTE: Ensure xsapp does not already exist, deleted previous or rename if required </strong>  
+
 Deploy xsuaa service which creates role in SCP CF 
 > kubectl replace --force -n mlteam -f deployment_xsuaa.yaml
 
 Manually generate the XSUAA credentials in Kyma  UI 
-> Service Managent -> Instances -> xsuaa-jupyterhub-mlteam  
-> Crednetials tab -> Create Credentials button  
-> Click on generated credentials and hit 'decode' button  
+> Select namespace created (e.g. mlteam)
+> Naviate to 'Service Management -> Instances -> xsuaa-jupyterhub-mlteam'  
+> Select 'Credentials' Tab  
+> Click 'Create Credentials' Button  
+> Click on the generated credentials   
+> Click 'Decode' button  
 
 
 
