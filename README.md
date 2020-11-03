@@ -18,9 +18,11 @@ Run a shared jupyter hub environment that enables XSUAA autenticated users to ac
 > kubectl cluster-info  -n mlteam
 
 
-## STEP 1 - Create Persitant volume claim to be used for storage of Jupyter Notebooks and associated files
+## STEP 1 - Create Persitant volume claim 
+<strong> To be used for storage of Jupyter Notebooks and associated files </strong>
 kubectl replace --force -n mlteam -f deployment_pvc.yaml
 
 
-## STEP 2 - Create XSUAA service  [Ensure xsapp does not already exist]
+## STEP 2 - Create XSUAA service  
+<strong> NOTE: Ensure xsapp does not already exist, deleted previous or rename if required </strong>
 kubectl replace --force -n mlteam -f deployment_xsuaa.yaml
