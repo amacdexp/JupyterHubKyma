@@ -1,0 +1,124 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jupyterhub
+  labels:
+    app: jupyterhub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyterhub
+  template:
+    metadata:
+      labels:
+        app: jupyterhub
+        version: v1
+    spec:
+      containers:
+        - name: jupyterhub
+          image: jupyterhub/jupyterhub
+          #imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
+          #imagePullPolicy: Never
+          command: ["/bin/sh", "-c"]
+          args: 
+            - >-
+                echo "Add user 'jupyter/Welcome01'" &&
+                chmod 775 /home &&
+                chown 1000 /home &&
+                chgrp 100 /home &&
+                useradd jupyter -d /home/jupyter -p "$(openssl passwd -1 Welcome01)" &&
+                groupadd mlteam &&
+                mkdir -p /home/mlteam &&
+                chgrp -R mlteam /home/mlteam &&
+                chmod -R 2775 /home/mlteam && 
+                apt -y update &&
+                apt-get -y install git  &&
+                pip install --upgrade notebook jupyterlab jupyterlab-git hana-ml oauthenticator &&
+                jupyterhub --generate-config &&
+                echo "#c.Authenticator.admin_users = {'mlteam'}"  >>  jupyterhub_config.py   &&
+                echo "c.Spawner.default_url = '/lab'"  >>  jupyterhub_config.py   &&
+                echo "c.JupyterHub.authenticator_class = 'oauthenticator.generic.LocalGenericOAuthenticator'"   >>  jupyterhub_config.py   &&
+                echo 'c.OAuthenticator.oauth_callback_url = "https://jupyterhub.<clusterid>.kyma.shoot.live.k8s-hana.ondemand.com//hub/oauth_callback"'   >>  jupyterhub_config.py   &&
+                echo 'c.OAuthenticator.client_id = "sb-xsuaa-jupyterhub-mlteam!t1188"'   >>  jupyterhub_config.py   &&
+                echo 'c.OAuthenticator.client_secret = "<password>"'   >>  jupyterhub_config.py   &&
+                echo 'c.GenericOAuthenticator.login_service = "SAP Cloud Platform XSUAA Authentication"'   >>  jupyterhub_config.py   &&
+                echo '#c.GenericOAuthenticator.username_key = "email"'   >>  jupyterhub_config.py   &&
+                echo "c.GenericOAuthenticator.username_key = lambda r: r.get('given_name').lower() + r.get('family_name').lower() " >> jupyterhub_config.py   &&
+                echo 'c.GenericOAuthenticator.authorize_url = "https://<domain>.authentication.eu20.hana.ondemand.com/oauth/authorize"'   >>  jupyterhub_config.py   &&
+                echo 'c.GenericOAuthenticator.token_url = "https://<domain>.authentication.eu20.hana.ondemand.com/oauth/token"'   >>  jupyterhub_config.py   &&
+                echo 'c.GenericOAuthenticator.userdata_url = "https://<domain>.authentication.eu20.hana.ondemand.com/userinfo"'   >>  jupyterhub_config.py   &&
+                echo 'c.LocalAuthenticator.create_system_users=True'   >>  jupyterhub_config.py   &&
+                echo "#c.LocalAuthenticator.add_user_cmd = ['adduser', '-q', '--gecos', '""', '--ingroup' ,'mlteam', '--home', '/home/mlteam', '--disabled-password' , '--no-create-home' , '--force-badname']"   >>  jupyterhub_config.py   &&
+                echo "c.LocalAuthenticator.add_user_cmd = ['adduser', '-q', '--gecos', '""', '--ingroup' ,'mlteam', '--disabled-password' ]"   >>  jupyterhub_config.py   &&
+                jupyter lab build &&
+                jupyterhub
+          # 
+          ports:
+            - name: http
+              containerPort: 8000
+          volumeMounts:
+          - name: user-storage-volume
+            mountPath: /home
+          env:
+          - name: GRANT_SUDO
+            value: "yes"
+          - name: JUPYTER_ENABLE_LAB
+            value: "yes"
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits:
+              memory: 4000Mi
+            requests:
+              memory: 3200Mi
+      securityContext:
+        fsGroup: 100
+      volumes:
+      - name: user-storage-volume
+        persistentVolumeClaim:
+          claimName: jupyterhub-pvc
+
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyterhub
+  labels:
+    app: jupyterhub
+spec:
+  #clusterIP: None
+  ports:
+  - name: http
+    targetPort: 8000
+    protocol: TCP
+    port: 8000
+  selector:
+    app: jupyterhub
+---
+apiVersion: gateway.kyma-project.io/v1alpha1
+kind: APIRule
+metadata:
+  name: jupyterhub
+spec:
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  rules:
+  - accessStrategies:
+    - config: {}
+      handler: allow
+    methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - HEAD
+    path: /.*
+  service:
+    host: jupyterhub.<clusterid>.kyma.shoot.live.k8s-hana.ondemand.com
+    name: jupyterhub
+    port: 8000
