@@ -1,12 +1,12 @@
 # JupyterHubKyma
 JupyterHub running on SAP Cloud Platform Kyma Runtime (Kubernetes) with XSUAA OAUTH2 authentication
 
-Run a shared jupyter hub environment that enables XSUAA autenticated users to access.
+Exanmple of runing a shared JupyteHub environment that enables XSUAA autenticated users to access.
 
 ## Pre Reqs:
 * Provision a Kyma environment on SAP Cloud Platform
 * Create a namespace e.g. "mlteam"
-* Download your Kyma/K8S access kubeconfig.yaml and set KUBECONFIG environment variable
+* Download your Kyma/K8S access kubeconfig.yml and set KUBECONFIG environment variable to point to kubeconfig.yml
 > ## windows cmd
 >> Set KUBECONFIG=C:\Users\<user>\Downloads\kubeconfig.yml 
 > ## windows powershell
