@@ -1,2 +1,2 @@
 # JupyterHubKyma
-JupyterHub running on SCP Kyma (K8S) with XSUAA OAUTH2 authentication
+JupyterHub running on SAP Cloud Platform Kyma Runtime (Kubernetes) with XSUAA OAUTH2 authentication
